@@ -17,6 +17,8 @@ sys.setrecursionlimit(1500)
 HERE = Path(__file__).parent
 sys.path[:0] = [str(HERE.parent), str(HERE / 'extensions')]
 import sphinx_bootstrap_theme
+from recommonmark.parser import CommonMarkParser
+
 
 def setup(app):
     app.add_stylesheet("style.css") # also can be a full URL
@@ -36,7 +38,14 @@ def setup(app):
     app.add_javascript("validate.js")
     app.add_javascript("venobox.js")
     app.add_javascript("wow.min.js")
-
+    app.add_config_value('markdown_parser_config', {
+        'auto_toc_tree_section': 'Content',
+        'enable_auto_doc_ref': True,
+        'enable_auto_toc_tree': True,
+        'enable_eval_rst': True,
+        'enable_inline_math': True,
+        'enable_math': True,
+    }, True)
 
 # -- Project information -----------------------------------------------------
 
@@ -54,7 +63,7 @@ release = '1.0'
 # ones.
 extensions = [ 'sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.doctest', 'sphinx.ext.todo', 'sphinx.ext.coverage',
     'sphinx.ext.mathjax', 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'sphinx.ext.napoleon', 'sphinx.ext.autosummary', 'sphinx_autodoc_typehints',  # needs to be after napoleon
-    'sphinx_rtd_theme', 'recommonmark' ]
+    'sphinx_rtd_theme', 'recommonmark']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -65,7 +74,11 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # source_suffix = ['.rst', '.md']
-source_suffix = '.md'
+source_suffix = '.rst'
+
+# The master toctree document.
+master_doc = 'index'
+
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -152,3 +165,34 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+
+# -- Options for LaTeX output ---------------------------------------------
+
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+}
+
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title,
+#  author, documentclass [howto, manual, or own class]).
+latex_documents = [
+    (master_doc, 'statsuace.tex', u'Statistical Sauce',
+     u'Rahul Bhadani', 'manual'),
+]
+
+

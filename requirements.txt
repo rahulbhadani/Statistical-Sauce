@@ -12,4 +12,5 @@ sphinx_rtd_theme
 sphinx_autodoc_typehints
 recommonmark
 pathlib
-
+sphinx-markdown-parser
+pymdown-extensions
