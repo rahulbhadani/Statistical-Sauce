@@ -14,3 +14,4 @@ recommonmark
 pathlib
 sphinx-markdown-parser
 pymdown-extensions
+sphinx_bootstrap_theme
